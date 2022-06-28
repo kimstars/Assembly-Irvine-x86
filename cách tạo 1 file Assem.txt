@@ -1,0 +1,12 @@
+tạo bằng C++ empty
+sau đó xóa các thư mục và chỉ để lại External Dependencies
+1,tạo 1 file mới ở source file có tên là Source.asm
+
+2, sau đó chuột phải vào source.asm=> properties=>General=>Item Type=> Microsoft Macro Assembler
+
+3,tiếp đến vẫn ở trang đó, chọn Microsoft Macro Assembler=> General=> Inclue Path=> C:\Irvine
+
+4, tiếp đến chuột phải vào Project chọn Build Dependencies=> Build Customization=> tích masm(.target..)
+
+5,chọn project chuột phải, properties=> LInker=> Additional Library Directories=> C:\Irvine
+Trong Linker chọn Input=> Additional Dependencies=> add Irvine32.lib
