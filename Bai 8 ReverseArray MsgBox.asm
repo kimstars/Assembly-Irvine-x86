@@ -1,5 +1,4 @@
-; AddTwo.asm - adds two 32-bit integers.
-; Chapter 3 example
+
 INCLUDE Irvine32.inc
 .386
 .model flat,stdcall
