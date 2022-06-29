@@ -35,7 +35,7 @@ Lap_02:
      MOV ESI,OFFSET arr;tro den mang arr
      MOV EDI,OFFSET arrReverse;tro den mang reverse in ra man hinh
      MOV ECX,lengthof arr;do dai cua mang
-
+; tao string 1,2,3,4,5 de in ra messagebox
 Lap:
      ;chia phan tu cho 10 de lay cac chu so tu hang don vi->hang chuc->....
      MOV EAX,0
@@ -67,3 +67,4 @@ INVOKE ExitPRocess,0
 main endp
 
 end main
+

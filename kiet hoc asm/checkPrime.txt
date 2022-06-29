@@ -1,0 +1,65 @@
+; kiem tra snt
+INCLUDE Irvine32.inc
+
+.data
+	intNum dword ?
+	check dword ?
+	i dword ?
+	str1 BYTE "Moi nhap vao mot so: ",0
+	MsgBoxYes db "la so nguyen to",0
+	MsgBoxNo db "khong la so nguyen to",0
+	MsgBoxCaption db "Kiem tra SNT",0
+
+.code
+main proc
+	lea edx, str1
+	call writestring
+	call readint
+	mov intNum, eax
+
+	call CheckPrime
+
+	mov ebx, check
+	cmp ebx, 1
+	je yes
+		invoke MessageBox, NULL, addr MsgBoxNo, addr MsgBoxCaption,MB_OK
+		jmp thoat
+
+	yes:
+		invoke MessageBox, NULL, addr MsgBoxYes, addr MsgBoxCaption,MB_OK
+
+	thoat:
+		exit
+
+	
+main endp
+
+CheckPrime proc 
+	mov eax, intNum
+	mov check, 1
+	mov i, 1
+
+	xor edx, edx
+	mov ebx,2 
+	div ebx
+	mov ecx, eax
+
+	lap:
+		inc i
+		mov ebx, i
+		mov edx, 0
+		mov eax, intNum
+		div ebx
+		cmp edx, 0
+		je thoat
+		loop lap
+
+	ret
+
+	thoat:
+		mov check, 0
+		ret
+
+CheckPrime endp
+
+end main

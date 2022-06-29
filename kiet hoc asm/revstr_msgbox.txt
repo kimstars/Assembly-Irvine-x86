@@ -1,0 +1,70 @@
+
+INCLUDE Irvine32.inc
+.386
+.model flat,stdcall
+.stack 4096
+ExitProcess proto,dwExitCode:dword
+
+.data
+    arr dword 1,2,3,4,5,6,7
+    arrsize = ($-arr)/TYPE arr
+
+    arrRev db 30 dup(?)
+    count db ?
+
+    caption db "thong bao",0 
+    
+.code
+main proc
+    mov ecx, arrsize 
+    mov esi, 0
+    lap01:
+        mov eax, arr[esi]
+        push eax
+        add esi, type arr
+        loop lap01
+
+    mov ecx, arrsize
+    mov esi, 0
+    lap02:
+        pop eax
+        mov arr[esi], eax
+        inc esi
+        loop lap02
+        mov esi, offset arr
+        mov edi, offset arrRev
+        mov ecx, lengthof arr
+; tao string 1,2,3,4,5 de in ra messagebox
+
+    lap:
+        mov eax, 0
+        mov al, [esi]
+    lap2:
+        mov edx, 0
+        mov ebx, 10
+        div ebx
+        push edx
+        inc count
+        cmp eax, 0
+        jne lap2
+
+    lap3:
+        pop eax
+        dec count 
+        add al, 30h
+        mov [edi], al
+        mov al, ','
+        inc edi
+        mov [edi], al
+        cmp count, 0
+        jne lap3
+        inc esi
+        inc edi
+        loop lap
+
+    INVOKE messagebox, null, addr arrRev, addr caption, MB_OK
+
+INVOKE ExitPRocess,0
+main endp
+
+end main

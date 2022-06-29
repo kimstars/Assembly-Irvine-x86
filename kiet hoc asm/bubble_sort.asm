@@ -39,7 +39,7 @@ PrintArr endp
 
 
 BubbleSort proc uses eax ecx esi,
-			pArray:PTR dword,
+			pArray: PTR dword,
 			count : dword
 
 	mov ecx, count

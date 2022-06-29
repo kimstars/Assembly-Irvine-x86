@@ -1,0 +1,43 @@
+
+INCLUDE Irvine32.inc
+.386
+.model flat,stdcall
+.stack 4096
+ExitProcess proto,dwExitCode:dword
+
+.data
+arr dword 1,5,8,89,20,63,15,1,30,98
+sizeArr = ($-arr)/4-1
+max dword ?
+.code
+main proc
+     call SearchMax
+     MOV EAX,0
+     MOV eax, max 
+     call WriteDec
+	invoke ExitProcess,0
+main endp
+;int max = a[0];
+    ;for (int i = 1; i < n; i++)
+        ;if (max < a[i])
+            ;max = a[i];
+    ;return max;
+searchMax PROC
+     mov esi, offset arr
+     xor eax, eax
+     mov ecx, sizeArr
+
+     luu:
+        mov eax, [esi]
+     lap:  
+        add esi, 4
+        cmp [esi], eax
+        jge luu
+        loop lap
+
+    mov max, eax
+    ret
+        
+searchMax ENDP
+
+end main
