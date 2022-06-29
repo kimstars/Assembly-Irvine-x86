@@ -1,0 +1,44 @@
+; better random range
+; random so nguyen ngau nhien tu M -> N-1
+
+INCLUDE Irvine32.inc	; 32-bit Protected mode program.
+
+.data
+    msg1 db "Nhap gia tri bat dau m = ",0
+    msg2 db "Nhap gia tri ket thuc n = ",0
+    m dword ?
+    n dword ?
+
+   
+.code
+main proc
+    lea edx, msg1
+    call writestring
+    call readint
+    mov  m, eax
+    call writestring
+    call readint
+    mov n, eax
+
+    mov ebx, m
+    mov eax, n
+
+    call BetterRandomRange
+    call writeint
+        
+    
+    exit
+
+main ENDP
+
+
+BetterRandomRange proc 
+    call Randomize
+    sub eax, ebx
+    call RandomRange
+    add eax, ebx
+    ret
+BetterRandomRange endp 
+
+
+END main

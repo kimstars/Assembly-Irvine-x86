@@ -1,0 +1,76 @@
+;;;;;;;;;;;;;;;;;;;;;
+for(i=2;i<=n;i++)
+    {        
+        dem=0;
+        for(j=2;j<=i/2;j++)
+        {
+            if(i%j==0)
+            dem++;
+        }        
+
+    }
+
+;;;;;;;;;;;;;;;;;;;;;
+
+
+
+INCLUDE Irvine32.inc	; 32-bit Protected mode program.
+
+.data
+
+    msg1 db "Nhap n = ", 0
+    msg2 db "so luong : ", 0
+    dem dword 0
+    n dword ?
+
+   
+.code
+main proc
+
+    lea edx, msg1
+    call writestring
+
+    call readint
+    mov n, eax
+
+    mov ecx, eax
+    lea edx, msg2
+    call writestring
+    call crlf
+
+    mov esi, 2 ; i 
+
+    L1:
+        push ecx
+        mov edi, 2 ; j
+        mov eax, esi
+        mov edx, 0
+        mov ebx, 2
+        div ebx
+        cmp edi, eax
+        jg L11
+
+        mov ecx, eax
+        mov dem, 0
+        L2:
+            mov eax, esi
+            mov edx, 0
+            mov ebx, edi
+            div ebx
+            cmp edx, 0
+            inc dem
+            inc edi
+            loop L2
+            mov eax, dem
+            call writedec
+    L11:
+        pop ecx
+        inc esi
+        loop L1
+        
+    
+    exit
+
+main ENDP
+
+END main

@@ -1,0 +1,45 @@
+
+;tinh tong 1/(1+N) + 1/(2+N) + 1/(3+N) + ... + 1/(N+N)
+INCLUDE Irvine32.inc	; 32-bit Protected mode program.
+
+.data
+    val1 dword 1
+    val2 dword 1
+    n dword ?
+    ress dword 0
+.code
+main proc
+	finit    
+
+    call readint 
+    mov n, eax
+
+    mov ecx, eax
+    mov esi, 1
+    lap:
+        mov val2, esi
+        mov eax, val2
+        add eax, n
+        mov val2, eax
+
+        fld    dword ptr  val1
+        fld    dword ptr  val2
+        fdiv                            
+        fstp   val2
+        
+        fld    dword ptr val2
+        fld    dword ptr ress
+        fadd 
+        fstp    ress
+
+        loop lap
+
+    call crlf
+    fld ress
+    call writefloat
+
+
+    exit
+
+main ENDP
+END main

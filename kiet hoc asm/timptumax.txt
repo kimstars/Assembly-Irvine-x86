@@ -1,0 +1,29 @@
+INCLUDE Irvine32.inc
+.data
+ arr dword 1,2,3,478,4,743,3,4554
+ tb1 byte 'so lon nhat:',0
+ tb2 byte 'vi tri: ',0
+.code
+main PROC
+mov esi, 0
+mov ecx, lengthof arr
+luu:
+    mov eax,arr[esi]
+    mov edi, esi
+lap1:; so sanh 
+    cmp eax,arr[esi]
+    jb luu
+    add esi, type arr
+    loop lap1 
+lap3: 
+    call writedec 
+    cdq
+    mov eax, edi
+    mov ebx, type arr
+    div ebx 
+    call crlf
+    call writedec 
+
+exit
+main ENDP
+END main
